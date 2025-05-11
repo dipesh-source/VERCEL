@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to MBBSBagsWala - Dare to Enter</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    body {
+      background: #000;
+      color: #f00;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      padding: 2rem;
+      z-index: 2;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3rem;
+      text-shadow: 0 0 15px red, 0 0 30px crimson;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #aaa;
+      margin-bottom: 2rem;
+    }
+
+    button {
+      background: #f00;
+      color: #000;
+      padding: 1rem 2rem;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 10px red;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .blood-drip {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      background: url('https://i.ibb.co/WcF30W7/blood-drip.png') repeat-x top;
+      background-size: contain;
+      animation: drip 2s infinite linear;
+      z-index: 1;
+    }
+
+    @keyframes drip {
+      0% { background-position: 0 0; }
+      100% { background-position: 100% 10px; }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="blood-drip"></div>
+  <div class="container">
+    <h1>MBBSBagsWala</h1>
+    <p>Enter if you dare. The bags are cursed...</p>
+    <button onclick="scream()">ENTER NOW</button>
+  </div>
+
+  <audio id="scream-sound" src="https://www.soundjay.com/human/sounds/scream-01.mp3" preload="auto"></audio>
+
+  <script>
+    function scream() {
+      document.getElementById('scream-sound').play();
+      alert("You've unleashed the curse...");
+    }
+
+    // Spooky random flashing background
+    setInterval(() => {
+      document.body.style.backgroundColor = ['#000', '#111', '#222', '#400'][Math.floor(Math.random() * 4)];
+    }, 500);
+
+    // Floating ghost eyes
+    const canvas = document.createElement('canvas');
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const eyes = [];
+    for (let i = 0; i < 40; i++) {
+      eyes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: 5 + Math.random() * 10
+      });
+    }
+
+    function drawEyes() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      eyes.forEach(eye => {
+        ctx.beginPath();
+        ctx.arc(eye.x, eye.y, eye.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'red';
+        ctx.fill();
+      });
+    }
+
+    setInterval(drawEyes, 100);
+  </script>
+</body>
+</html>
+
